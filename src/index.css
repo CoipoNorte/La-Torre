@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@theme {
+  --font-type: 'Special Elite', 'Courier New', monospace;
+  --font-display: 'Cinzel', serif;
+  --font-body: 'EB Garamond', serif;
+  --color-bg: #121016;
+  --color-bone: #d4c4a0;
+  --color-blood: #8b1a1a;
+}
+
+* { -webkit-tap-highlight-color: transparent; box-sizing: border-box; }
+html, body, #root {
+  height: 100%; margin: 0;
+  background: var(--color-bg);
+  color: var(--color-bone);
+  font-family: var(--font-body);
+  overscroll-behavior: none;
+}
+
+/* Stone texture bg — lighter to be readable */
+.stone-bg {
+  background:
+    radial-gradient(ellipse at 50% -20%, rgba(120,30,30,0.10), transparent 55%),
+    linear-gradient(180deg, #151218 0%, #1a161e 50%, #121016 100%);
+}
+.vignette::after {
+  content:''; position:fixed; inset:0; pointer-events:none; z-index:60;
+  box-shadow: inset 0 0 120px 30px rgba(0,0,0,0.6);
+}
+
+.font-type { font-family: var(--font-type); }
+.font-display { font-family: var(--font-display); letter-spacing: 0.04em; }
+
+/* Scrollbar */
+.scroll-styled::-webkit-scrollbar { width: 6px; }
+.scroll-styled::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); }
+.scroll-styled::-webkit-scrollbar-thumb { background: rgba(139,26,26,0.5); border-radius: 2px; }
+.scroll-styled { scrollbar-width: thin; scrollbar-color: rgba(139,26,26,0.5) rgba(255,255,255,0.04); }
+
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-5px)} 60%{transform:translateX(5px)} }
+@keyframes flashRed { 0%{background:rgba(139,26,26,0)} 40%{background:rgba(139,26,26,0.3)} 100%{background:rgba(139,26,26,0)} }
+@keyframes floatUp { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(-40px)} }
+@keyframes pulseSoft { 0%,100%{opacity:1} 50%{opacity:0.5} }
+@keyframes fadeIn { 0%{opacity:0} 100%{opacity:1} }
+@keyframes riseIn { 0%{opacity:0;transform:translateY(12px)} 100%{opacity:1;transform:translateY(0)} }
+@keyframes slideUpModal { 0%{opacity:0;transform:translateY(30px)} 100%{opacity:1;transform:translateY(0)} }
+@keyframes emberGlow { 0%,100%{text-shadow:0 0 6px rgba(200,80,20,0.3)} 50%{text-shadow:0 0 16px rgba(200,80,20,0.6)} }
+@keyframes flicker { 0%,100%{opacity:1} 30%{opacity:0.92} 50%{opacity:0.4} 55%{opacity:0.95} 70%{opacity:0.88} }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-4px)} }
+@keyframes eyeBlink { 0%,38%,42%,100%{transform:scaleY(1)} 40%{transform:scaleY(0.1)} }
+@keyframes hitFlash { 0%{background:transparent} 15%{background:rgba(180,30,30,0.35)} 100%{background:transparent} }
+@keyframes enemyLunge { 0%{transform:translateY(0) scale(1)} 30%{transform:translateY(18px) scale(1.15)} 60%{transform:translateY(5px) scale(1.05)} 100%{transform:translateY(0) scale(1)} }
+@keyframes playerRecoil { 0%{transform:translateY(0)} 25%{transform:translateY(4px)} 50%{transform:translateY(-2px)} 100%{transform:translateY(0)} }
+@keyframes menuShake { 0%,100%{transform:translateX(0)} 15%{transform:translateX(-3px)} 30%{transform:translateX(3px)} 45%{transform:translateX(-2px)} 60%{transform:translateX(2px)} }
+
+.animate-shake { animation: shake 0.3s ease-in-out; }
+.animate-floatUp { animation: floatUp 0.85s ease-out forwards; }
+.animate-pulse-slow { animation: pulseSoft 2s ease-in-out infinite; }
+.animate-fadeIn { animation: fadeIn 0.4s ease-out; }
+.animate-riseIn { animation: riseIn 0.35s cubic-bezier(.2,.8,.2,1); }
+.animate-slideUpModal { animation: slideUpModal 0.25s cubic-bezier(.2,.9,.2,1); }
+.animate-ember { animation: emberGlow 3s ease-in-out infinite; }
+.animate-flicker { animation: flicker 6s linear infinite; }
+.animate-blink { animation: blink 1s step-end infinite; }
+.animate-bob { animation: bob 2.4s ease-in-out infinite; }
+.animate-eyeBlink { animation: eyeBlink 5s ease-in-out infinite; }
+.animate-hitFlash { animation: hitFlash 0.4s ease-out; }
+.animate-enemyLunge { animation: enemyLunge 0.5s cubic-bezier(.2,.8,.3,1); }
+.animate-playerRecoil { animation: playerRecoil 0.3s ease-out; }
+.animate-menuShake { animation: menuShake 0.35s ease-in-out; }
+
+/* Buttons — readable dark stone */
+.btn-stone {
+  font-family: var(--font-display); font-weight:700; letter-spacing:0.05em;
+  background: linear-gradient(180deg, #302828 0%, #221c1c 100%);
+  border: 1px solid rgba(160,130,90,0.3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 2px 4px rgba(0,0,0,0.3);
+  color: #d4c4a0;
+  transition: transform .1s, box-shadow .15s, border-color .15s;
+}
+.btn-stone:hover { border-color: rgba(200,150,80,0.5); }
+.btn-stone:active { transform: scale(.97); }
+
+/* Blood accent button */
+.btn-blood {
+  font-family: var(--font-display); font-weight:700; letter-spacing:0.05em;
+  background: linear-gradient(180deg, #7a1a1a 0%, #4a0d0d 100%);
+  border: 1px solid rgba(180,60,40,0.5);
+  box-shadow: inset 0 1px 0 rgba(255,150,120,0.1), 0 2px 6px rgba(0,0,0,0.4);
+  color: #f0dcc0;
+  transition: transform .1s, box-shadow .15s;
+}
+.btn-blood:hover { box-shadow: inset 0 1px 0 rgba(255,150,120,0.15), 0 0 12px rgba(139,26,26,0.4); }
+.btn-blood:active { transform: scale(.97); }
+
+/* Panel — lighter dark stone, readable */
+.panel {
+  background: linear-gradient(180deg, rgba(30,26,32,0.95), rgba(20,18,22,0.95));
+  border: 1px solid rgba(140,120,80,0.2);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+}
+.gilt-border { border: 1px solid rgba(140,120,80,0.3); box-shadow: 0 0 0 1px rgba(0,0,0,0.3), inset 0 0 16px rgba(0,0,0,0.3); }
+
+.label { font-family: var(--font-display); font-size:10px; text-transform:uppercase; letter-spacing:0.2em; color: rgba(180,155,110,0.85); font-weight:700; }
+.divider-rune { height:1px; background: linear-gradient(90deg, transparent, rgba(160,130,80,0.4), transparent); margin: 12px 0; }
+
+/* Legacy fallbacks */
+.btn-primary { background: linear-gradient(180deg,#7a1a1a,#4a0d0d); border:1px solid rgba(180,60,40,0.5); color:#f0dcc0; font-weight:700; border-radius:4px; }
+.btn-secondary { background: linear-gradient(180deg,#302828,#221c1c); border:1px solid rgba(160,130,90,0.3); color:#d4c4a0; font-weight:700; border-radius:4px; }
+.btn-danger { background: linear-gradient(180deg,#5a0808,#300404); border:1px solid rgba(180,40,40,0.5); color:#e8a0a0; font-weight:700; border-radius:4px; }
